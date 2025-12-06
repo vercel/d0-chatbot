@@ -12,6 +12,12 @@ const runMigrate = async () => {
     throw new Error("POSTGRES_URL is not defined");
   }
 
+  // Skip migrations if using dummy credentials (for build testing)
+  if (process.env.POSTGRES_URL.includes("dummy")) {
+    console.log("⏭️  Skipping migrations (dummy database URL)");
+    process.exit(0);
+  }
+
   const connection = postgres(process.env.POSTGRES_URL, { max: 1 });
   const db = drizzle(connection);
 
