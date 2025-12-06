@@ -14,7 +14,7 @@ test.describe("Chat activity", () => {
     await chatPage.isGenerationComplete();
 
     const assistantMessage = await chatPage.getRecentAssistantMessage();
-    expect(assistantMessage.content).toContain("It's just green duh!");
+    expect(assistantMessage?.content).toContain("It's just green duh!");
   });
 
   test("Redirect to /chat/:id after submitting message", async () => {
@@ -22,7 +22,7 @@ test.describe("Chat activity", () => {
     await chatPage.isGenerationComplete();
 
     const assistantMessage = await chatPage.getRecentAssistantMessage();
-    expect(assistantMessage.content).toContain("It's just green duh!");
+    expect(assistantMessage?.content).toContain("It's just green duh!");
     await chatPage.hasChatIdInUrl();
   });
 
@@ -31,7 +31,7 @@ test.describe("Chat activity", () => {
     await chatPage.isGenerationComplete();
 
     const assistantMessage = await chatPage.getRecentAssistantMessage();
-    expect(assistantMessage.content).toContain(
+    expect(assistantMessage?.content).toContain(
       "With Next.js, you can ship fast!"
     );
   });
@@ -63,7 +63,7 @@ test.describe("Chat activity", () => {
     await chatPage.isGenerationComplete();
 
     const assistantMessage = await chatPage.getRecentAssistantMessage();
-    expect(assistantMessage.content).toContain("It's just green duh!");
+    expect(assistantMessage?.content).toContain("It's just green duh!");
 
     const userMessage = await chatPage.getRecentUserMessage();
     await userMessage.edit("Why is the sky blue?");
@@ -71,7 +71,7 @@ test.describe("Chat activity", () => {
     await chatPage.isGenerationComplete();
 
     const updatedAssistantMessage = await chatPage.getRecentAssistantMessage();
-    expect(updatedAssistantMessage.content).toContain("It's just blue duh!");
+    expect(updatedAssistantMessage?.content).toContain("It's just blue duh!");
   });
 
   test("Hide suggested actions after sending message", async () => {
@@ -95,7 +95,7 @@ test.describe("Chat activity", () => {
     await chatPage.isGenerationComplete();
 
     const assistantMessage = await chatPage.getRecentAssistantMessage();
-    expect(assistantMessage.content).toBe("This painting is by Monet!");
+    expect(assistantMessage?.content).toBe("This painting is by Monet!");
   });
 
   test("Call weather tool", async () => {
@@ -104,7 +104,7 @@ test.describe("Chat activity", () => {
 
     const assistantMessage = await chatPage.getRecentAssistantMessage();
 
-    expect(assistantMessage.content).toBe(
+    expect(assistantMessage?.content).toBe(
       "The current temperature in San Francisco is 17°C."
     );
   });
@@ -114,7 +114,7 @@ test.describe("Chat activity", () => {
     await chatPage.isGenerationComplete();
 
     const assistantMessage = await chatPage.getRecentAssistantMessage();
-    await assistantMessage.upvote();
+    await assistantMessage?.upvote();
     await chatPage.isVoteComplete();
   });
 
@@ -123,7 +123,7 @@ test.describe("Chat activity", () => {
     await chatPage.isGenerationComplete();
 
     const assistantMessage = await chatPage.getRecentAssistantMessage();
-    await assistantMessage.downvote();
+    await assistantMessage?.downvote();
     await chatPage.isVoteComplete();
   });
 
@@ -132,10 +132,10 @@ test.describe("Chat activity", () => {
     await chatPage.isGenerationComplete();
 
     const assistantMessage = await chatPage.getRecentAssistantMessage();
-    await assistantMessage.upvote();
+    await assistantMessage?.upvote();
     await chatPage.isVoteComplete();
 
-    await assistantMessage.downvote();
+    await assistantMessage?.downvote();
     await chatPage.isVoteComplete();
   });
 
@@ -148,7 +148,7 @@ test.describe("Chat activity", () => {
     expect(userMessage.content).toBe("Why is the sky blue?");
 
     const assistantMessage = await chatPage.getRecentAssistantMessage();
-    expect(assistantMessage.content).toContain("It's just blue duh!");
+    expect(assistantMessage?.content).toContain("It's just blue duh!");
   });
 
   test("auto-scrolls to bottom after submitting new messages", async () => {
